@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react';
 import { getDogImages } from './api/api';
 
+interface DogImage {
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+}
+
 const App = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<DogImage[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +22,7 @@ const App = () => {
         limit: 10,
       });
       setData(result);
+      // console.log(result);
     };
 
     fetchData();
@@ -22,7 +30,17 @@ const App = () => {
 
   return (
     <>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <div>
+        {Array.isArray(data) ? (
+          data.map((item) => (
+            <div key={item.id || item.url}>
+              <div>{item.url}</div>
+            </div>
+          ))
+        ) : (
+          <p>Loading...</p> // 혹은 오류 메시지 처리
+        )}
+      </div>
     </>
   );
 };
