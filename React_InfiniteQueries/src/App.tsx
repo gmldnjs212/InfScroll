@@ -28,15 +28,13 @@ const App = () => {
       <h1 className="text-[50px] font-bold">Dog Images Inf Scroll</h1>
       <div className="min-h-full grid grid-auto-flow grid-cols-3 mt-10 gap-2">
         {isLoading && <p> Loading.. </p>}
-        {isError && <p>Error : {error.message}</p>}
-        {data &&
-          data.map((item) => (
-            <div key={item.id || item.url} className="flex flex-col items-center mb-10">
-              <img src={item.url} alt={item.url} className="w-[300px] h-[150px] object-cover" />
-              <p>{item.id}</p>
-            </div>
-          ))}
-        {isLoading && <p>Loading...</p>}
+        {isError && <p>Error : {error?.message}</p>}
+        {data?.map((item) => (
+          <div key={item.id} className="flex flex-col items-center mb-10">
+            <img src={item.url} alt={item.url} className="w-[300px] h-[150px] object-cover" />
+            <p>{item.id}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
